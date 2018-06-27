@@ -1,0 +1,49 @@
+p.sc-font{
+    padding:0 16px;
+}
+.sc-color-selector{
+    padding:0 8px;
+}
+
+.img{
+    padding:25px;
+    width:100%;
+}
+
+.sc-spinner-loading.orange.big {
+    width: 150px;
+    height: 150px;
+    border-width: 10px !important;
+}
+
+.collapse-section {
+    font-weight:  bold;
+    border: #f2f5f7 solid 1px;
+    background-color: #f2f5f7;
+    margin-bottom: 9px;
+    padding-top: 9px;
+}
+
+.padding-bottom-xxs {
+  padding-bottom: 9px;
+}
+
+.changeColor {
+  color: #ff7500;
+}
+
+.change:hover {
+    color: #ff7500;
+}
+
+
+#act-success{
+	background-color: #e6f5cf;
+  color: #196600;
+  border: 1px solid #196600;
+}
+
+#act-error{
+	background-color: #ffdddc;
+	color: #B80000;
+	border: 1px solid #B80000;
