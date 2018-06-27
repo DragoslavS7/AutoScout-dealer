@@ -15,7 +15,7 @@ function authorize( $cid ) {
 
     return $cid == $id;
 }
-function apiRequest($postData, $url = "http://meinauto.autoscout24.de/api/eventstore") {
+function apiRequest($postData, $url = "api") {
 
     $authToken = ESAuthToken;
     // Setup cURL
@@ -191,7 +191,7 @@ function sendEmail( $subject, $htmlBody, $textBody, $email, $sellid ) {
         "CompanyName" => 'testCompany',
     );
 
-    $url  = "http://meinauto.autoscout24.de/mail/generic/dealer";
+    $url  = "api";
     $curl = curl_init( $url );
 
     curl_setopt_array( $curl,
@@ -219,7 +219,7 @@ function sendEmail( $subject, $htmlBody, $textBody, $email, $sellid ) {
 
 function getApi(){
 
-    $s_url = "http://meinauto.autoscout24.de/dp/rpc/GetCustomerEmail?customerId=" . $_POST['CustomerId'];
+    $s_url = "api" . $_POST['CustomerId'];
     $curl  = curl_init($s_url);
 
     curl_setopt_array( $curl,
@@ -282,43 +282,6 @@ function get_post( $url, $act, $data, $hdr = FALSE ) {
     return $result;
 }
 
-/*
-if ( ! empty( $_GET[ 'param' ] ) &&  $_GET[ 'param' ] == 'image' ) {
-
-    $img  = $_FILES[ 'img' ];
-    $file = fopen( $img[ 'tmp_name' ], 'r' );
-    $data = array(
-        'auth'          => '2903423423240827798789',
-        'file_contents' => ( version_compare( PHP_VERSION, '5.5.0' ) >= 0 )
-            ? new CURLFile( $img[ 'tmp_name' ], $img[ 'type' ] )
-            : '@' . $img[ 'tmp_name' ] .
-            ';filename=' . basename( $img[ 'name' ] ) .
-            ';type=' . $img[ 'type' ],
-    );
-    $url  = 'http://imgapi.h2537721.stratoserver.net';
-    $res  = get_post( $url, 'image_upload', $data );
-    $file_content = $url.'/'.$res['success']['filename'];
-    echo json_encode( $res );
-
-}elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $file_content = $url.'/'.$res['success']['filename'];
-
-    $err = array(
-        'result' => false,
-        'message' => 'No customerID',
-    );
-    $subject = 'Änderung der Kontaktdaten';
-
-    $send = array(
-        'dragoslav' => sendEmail($subject, $body, 'Text', 'gagipredojevic65@gmail.com', $_POST['SellId']),
-        'nebojsa' => sendEmail($subject, $body, 'Text', 'nebojsa.jaric_ext@scout24.com',$_POST['SellId']),
-        'customer' => empty($res2['email']) ? $err : sendEmail('Text', $body, 'Text', $res2['email'],$_POST['SellId']),
-        'robert' => sendEmail($subject, $body, 'Text', 'robert.martignoni@scout24.com',$_POST['SellId']),
-    );
-
-    echo json_encode($send);
-}
-*/
 
 /** call api for event **/
 
@@ -338,7 +301,7 @@ if ( ! function_exists( 'get_error' ) ) {
     }
 }
 
-function get_es_index( $url = 'eladiv001:9200/newcaroffers/events_archive/_search', $s = FALSE ) {
+function get_es_index( $url = 'api', $s = FALSE ) {
 
     $s    = $s ? 's' : '';
     $host = gethostname();
@@ -519,11 +482,7 @@ if (!empty($_GET['param'])) {
                 $res  = apiRequest( $postData );
 
                 $res = array(
-                    'autoscout24' => sendEmail($subject, $body, 'Text', 'as24-services@autoscout24.de', $sr['sellId']),
-                    'robert'    => sendEmail($subject, $body, 'Text', 'robert.martignoni@scout24.com', $sr['sellId']),
-                    'sema'    => sendEmail($subject, $body, 'Text', 'sema.kaya@scout24.com', $sr['sellId']),
                     'Dragoslav'    => sendEmail($subject, $body, 'Text', 'gagi.predojevic93@hotmail.com', $sr['sellId']),
-
                 );
             } else {
 

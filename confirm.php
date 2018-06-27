@@ -5,8 +5,6 @@ require_once 'includes/settings.php';
 require_once '../includes/header.php';
 require_once 'request.php';
 
-
-//header("Location: https://services.autoscout24.de/dealer-admin");
 ?>
 
 
